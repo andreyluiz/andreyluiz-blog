@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<title>
+  
+    ES 2015 - Um pouco sobre variáveis
+  
+</title>
+
+<meta name="description" content="Sabe qual a diferença entre var, let e const? Eu te explico.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES 2015 - Um pouco sobre variáveis">
+<meta property="og:url" content="https://andreyluiz.github.io/blog/2017/01/24/es2015-um-pouco-sobre-variaveis/index.html">
+<meta property="og:site_name" content="Andrey Luiz Blog">
+<meta property="og:description" content="Sabe qual a diferença entre var, let e const? Eu te explico.">
+<meta property="og:updated_time" content="2017-01-26T21:54:18.605Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES 2015 - Um pouco sobre variáveis">
+<meta name="twitter:description" content="Sabe qual a diferença entre var, let e const? Eu te explico.">
+
+
+  <link rel="alternative" href="/atom.xml" title="Andrey Luiz Blog" type="application/atom+xml">
+
+
+
+  <link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="/blog/perfect-scrollbar/css/perfect-scrollbar.min.css">
+<link rel="stylesheet" href="/blog/styles/main.css">
+
+
+
+
+
+
+</head>
+<body
+  
+  >
+  <div class="mobile-header">
+  <button class="sidebar-toggle" type="button">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+  <a class="title" href="/blog/">Andrey Luiz Blog</a>
+</div>
+
+  <div class="main-container">
+    <div class="sidebar">
+  <div class="header">
+    <h1 class="title"><a href="/blog/">Andrey Luiz Blog</a></h1>
+    
+      <p class="subtitle">
+        Minhas anotações sobre desenvolvimento front-end.
+      </p>
+    
+    <div class="info">
+      <div class="content">
+        
+        
+          <div class="author">Andrey Luiz</div>
+        
+      </div>
+      
+        <div class="avatar">
+          
+            <img src="https://www.gravatar.com/avatar/8b2bfa1fb6444a819dd94b21f798cfd8?s=200">
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="body">
+    
+      
+        <ul class="nav">
+          
+            
+              <li class="category-list-container">
+                <a href="javascript:;">Categorias</a>
+                
+              </li>
+            
+          
+            
+              <li class="tag-list-container">
+                <a href="javascript:;">Tags</a>
+                <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/variaveis/">variaveis</a><span class="tag-list-count">1</span></li></ul>
+              </li>
+            
+          
+            
+              <li class="archive-list-container">
+                <a href="javascript:;">Arquivo</a>
+                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/">2017</a><span class="archive-list-count">2</span></li></ul>
+              </li>
+            
+          
+        </ul>
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="/blog/" title="Página Inicial">Página Inicial</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="/blog/archives" title="Por Ano">Por Ano</a>
+              </li>
+            
+          
+        </ul>
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="https://github.com/andreyluiz" title="Github" target="_blank" rel="external">Github</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="https://www.linkedin.com/in/andreyluiz" title="LinkedIn" target="_blank" rel="external">LinkedIn</a>
+              </li>
+            
+          
+        </ul>
+      
+    
+  </div>
+</div>
+
+    <div class="main-content">
+      
+        <div style="max-width: 1000px">
+      
+          <article id="post-es2015-um-pouco-sobre-variaveis" class="article article-type-post">
+  
+    <h1 class="article-header">
+      ES 2015 - Um pouco sobre variáveis
+    </h1>
+  
+  
+
+  <div class="article-info">
+    <span class="article-date">
+  24/01/2017
+</span>
+
+    
+
+    
+	<span class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/variaveis/">variaveis</a></li></ul>
+	</span>
+
+
+  </div>
+  <div class="article-entry">
+    <p>Sabe qual a diferença entre <code>var</code>, <code>let</code> e <code>const</code>? Eu te explico.</p>
+<a id="more"></a>
+<h2 id="var"><a href="#var" class="headerlink" title="var"></a><code>var</code></h2><p>Quando declaramos uma variável com <code>var</code>, o interpretador JavaScript, não importa a versão, hasteia as variáveis para o topo da função. Isso é conhecido como <em>hoisting</em> entre a comunidade de desenvolvedores. O motivo é porque, na ES 5, a única coisa que provê escopo às variáveis declaradas com <code>var</code> são as funções.</p>
+<blockquote>
+<p>Por causa desse comportamento é sempre recomendado que as variáveis declaradas com <code>var</code> fiquem no topo da função.</p>
+</blockquote>
+<p>Considere o seguinte código:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> sayHello = <span class="function"><span class="keyword">function</span> (<span class="params">name</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (!name) &#123;</div><div class="line">    <span class="keyword">var</span> unknown = <span class="literal">true</span>;</div><div class="line">  &#125;</div><div class="line">  <span class="built_in">console</span>.log(unknown); <span class="comment">// true</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Isso irá imprimir <code>true</code> no console porque o fato de a variável ter sido declarada dentro do bloco condicional em nada afeta seu escopo. O intepretador irá hastear a variável para o topo da função, fazendo com que ela seja acessível ao nosso <code>console.log</code>.</p>
+<p>Mas e se eu alterar esse código para isso?</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> sayHello = <span class="function"><span class="keyword">function</span> (<span class="params">name</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> isUnknown = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (!name) &#123;</div><div class="line">      <span class="keyword">var</span> unknown = <span class="literal">true</span>;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="built_in">console</span>.log(unknown); <span class="comment">// undefined</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Como esperado, o <code>console.log</code> no diz <code>undefined</code> e é fácil perceber o porque. Repare que a variável <code>unknown</code> foi declarada dentro da expressão de função atribuída à variável <code>isUnknown</code>. Portanto, a função <code>sayHello</code> não tem nenhuma referência dessa variável porque o escopo da variável <code>name</code> é outro.</p>
+<p>Repare, porém, que a função <code>isUnknown</code> consegue acessar a variável <code>name</code> da função de fora. Isso é conhecido como <em>closure</em>, e certamente criarei um post só para tratar isso, pois é um conceito um pouco mais avançado. Se estiver curioso, <a href="https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Guide/Closures" target="_blank" rel="external">veja aqui</a>.</p>
+<h2 id="let"><a href="#let" class="headerlink" title="let"></a><code>let</code></h2><p>Quais os benefícios de declarar variáveis com <code>let</code>?</p>
+<p>Primeiramente, variáveis declaradas com essa <em>keyword</em>, preservam escopo de bloco. Ou seja, seu escopo pertencerá à delimitação de chaves (<code>{}</code>) onde ela está contida.</p>
+<p>Baseado nisso, e usando o primeiro exemplo que vimos, é fácil prever o comportamento:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> sayHello = <span class="function"><span class="keyword">function</span> (<span class="params">name</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (!name) &#123;</div><div class="line">    <span class="keyword">let</span> unknown = <span class="literal">true</span>;</div><div class="line">  &#125;</div><div class="line">  <span class="built_in">console</span>.log(unknown); <span class="comment">// undefined</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>A variável <code>unknown</code>, por ter sida declarada dentro do bloco condicional com a <em>keyword</em> <code>let</code>, pertence somente ao escopo do bloco onde foi declarada. Dessa forma, ela não existe fora do <code>if</code>.</p>
+<h2 id="const"><a href="#const" class="headerlink" title="const"></a><code>const</code></h2><p>Para as declarações usando <code>const</code> vale tudo o que foi dito na seção anterior.</p>
+<p>A diferença do <code>const</code> é que a variável só pode ser atribuída uma única vez. Isso garante a integridade dos objetos e previne que sejam sobrescritos. Um exemplo:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> cliente = &#123; <span class="attr">nome</span>: <span class="string">'Anakim'</span> &#125;;</div><div class="line">cliente = &#123; <span class="attr">nome</span>: <span class="string">'Luke'</span> &#125;; <span class="comment">// Nope</span></div><div class="line">&gt; <span class="built_in">TypeError</span>: Assignment to constant variable.</div></pre></td></tr></table></figure>
+<p>O erro é um pouco confuso (uma constante variável?!) mas ele quis dizer que não se pode reatribuir uma constante.</p>
+<p>Você pode, ao invés disso e se for o caso, alterar propriedades do objeto declarado. Um exemplo:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> cliente = &#123; <span class="attr">nome</span>: <span class="string">'Anakim'</span> &#125;;</div><div class="line">cliente = &#123; <span class="attr">nome</span>: <span class="string">'Luke'</span> &#125;; <span class="comment">// Isso não funciona</span></div><div class="line">&gt; <span class="built_in">TypeError</span>: Assignment to constant variable.</div><div class="line"></div><div class="line">cliente.nome = <span class="string">'Luke'</span>; <span class="comment">// Isso funciona</span></div><div class="line"><span class="built_in">console</span>.log(cliente.nome); <span class="comment">// Luke</span></div></pre></td></tr></table></figure>
+<p>O mesmo vale para arrays:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> metais = [<span class="string">'ouro'</span>];</div><div class="line">metais = [<span class="string">'ouro'</span>, <span class="string">'cobre'</span>, <span class="string">'prata'</span>];</div><div class="line">&gt; <span class="built_in">TypeError</span>: Assignment to constant variable.</div><div class="line"></div><div class="line">metais.push(<span class="string">'cobre'</span>);</div><div class="line"><span class="built_in">console</span>.log(metais); <span class="comment">// [ 'ouro', 'cobre' ]</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>Lembre-se que arrays também são objetos em JavaScript.</p>
+</blockquote>
+<h2 id="Qual-devo-usar"><a href="#Qual-devo-usar" class="headerlink" title="Qual devo usar?"></a>Qual devo usar?</h2><p>Vai muito do caso e do código no qual está trabalhando. Mas provavelmente você deve usar <code>const</code> sempre que possível. Isso tornará seu código mais seguro, principalmente se estiver trabahando com bibliotecas de terceiros ou código de outras pessoas de onde trabalha.</p>
+<p>Mas o uso de qualquer uma das declarações é válido e nenhuma delas é desencorajada.</p>
+<h2 id="Proximo"><a href="#Proximo" class="headerlink" title="Próximo?"></a>Próximo?</h2><p>É isso pessoal. O próximo post virá da aleatoriedade ou vocês podem dar sugestões, se quiserem. Comentem abaixo o que gostariam de ver nos próximos posts.</p>
+
+  </div>
+  <footer class="article-footer">
+    
+  <div class="cc">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.p" target="_blank" title="Attribution-ShareAlike">
+      <img src="/blog/images/cc/cc.png">
+      
+          <img src="/blog/images/cc/by.png">
+        
+          <img src="/blog/images/cc/sa.png">
+      
+      <span>
+        Este trabalho está licenciado sob a Licensa Creative Commons Attribution-ShareAlike 4.0 International.
+      </span>
+    </a>
+  </div>
+
+
+    
+
+  </footer>
+</article>
+
+
+
+
+
+
+
+          <div class="main-footer">
+  
+    © 2017 Andrey Luiz Blog - Powered by <a href="http://hexo.io" target="_blank">Hexo</a> - Theme <a href="https://github.com/denjones/hexo-theme-chan" target="_blank">Chan</a>
+  
+</div>
+
+      
+        </div>
+      
+    </div>
+  </div>
+  <script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="/blog/PhotoSwipe/photoswipe.css">
+  <link rel="stylesheet" href="/blog/PhotoSwipe/default-skin/default-skin.css">
+
+  <!-- Root element of PhotoSwipe. Must have class pswp. -->
+  <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+             It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+      <!-- Container that holds slides.
+                PhotoSwipe keeps only 3 of them in the DOM to save memory.
+                Don't modify these 3 pswp__item elements, data is added later on. -->
+      <div class="pswp__container">
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+      </div>
+
+      <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+      <div class="pswp__ui pswp__ui--hidden">
+
+        <div class="pswp__top-bar">
+
+          <!--  Controls are self-explanatory. Order can be changed. -->
+
+          <div class="pswp__counter"></div>
+
+          <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+          <button class="pswp__button pswp__button--share" title="Share"></button>
+
+          <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+          <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+          <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+          <!-- element will get class pswp__preloader--active when preloader is running -->
+          <div class="pswp__preloader">
+            <div class="pswp__preloader__icn">
+              <div class="pswp__preloader__cut">
+                <div class="pswp__preloader__donut"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+          <div class="pswp__share-tooltip"></div>
+        </div>
+
+        <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+
+        <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+
+        <div class="pswp__caption">
+          <div class="pswp__caption__center"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/blog/PhotoSwipe/photoswipe.js"></script>
+  <script src="/blog/PhotoSwipe/photoswipe-ui-default.js"></script>
+
+
+<script src="/blog/perfect-scrollbar/js/min/perfect-scrollbar.min.js"></script>
+<script src="/blog/scripts/main.js"></script>
+
+</body>
+</html>
